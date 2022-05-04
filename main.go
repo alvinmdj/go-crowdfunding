@@ -44,4 +44,9 @@ func handler(c *gin.Context) {
 	db.Find(&users)
 
 	c.JSON(http.StatusOK, users)
+
+	// handler
+	// service
+	// repository
+	// db
 }
