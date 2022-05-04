@@ -9,7 +9,7 @@
 
 ## Requirements
 
-- Go v1.18
+- Go v1.18+
 - MySQL
 
 ## Installation
