@@ -26,16 +26,20 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 	}
 
 	// pass struct as parameter to service
-	user, err := h.userService.RegisterUser(input)
+	newUser, err := h.userService.RegisterUser(input)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, nil)
 	}
+
+	// token, err := h.jwtService.GenerateToken()
+
+	formatter := user.FormatUser(newUser, "tokentokentokentokentoken")
 
 	response := helper.APIResponse(
 		"Account has been created",
 		http.StatusOK,
 		"success",
-		user,
+		formatter,
 	)
 
 	c.JSON(http.StatusOK, response)
