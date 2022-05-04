@@ -17,8 +17,19 @@ func main() {
 	}
 
 	userRepository := user.NewRepository(db)
-	user := user.User{
-		Name: "Test Create User",
-	}
-	userRepository.Create(user)
+	userService := user.NewService(userRepository)
+
+	userInput := user.RegisterUserInput{}
+	userInput.Name = "Save from service"
+	userInput.Occupation = "Software Engineer"
+	userInput.Email = "test@google.com"
+	userInput.Password = "12345678"
+
+	userService.RegisterUser(userInput)
+
+	// input from user
+	// handler : mapping user input to input struct
+	// service : mapping from input struct to User struct
+	// repository
+	// db
 }
