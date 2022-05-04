@@ -17,7 +17,14 @@
 - Clone this repository:
 
 ```sh
-git clone ...
+git clone https://github.com/alvinmdj/go-crowdfunding.git
+```
+
+- Import ```go_crowdfunding.sql``` and setup db config:
+
+```sh
+# in main.go line 14
+dsn := "<db_username>:<db_password>@tcp(127.0.0.1:3306)/<db_name>?charset=utf8mb4&parseTime=True&loc=Local"
 ```
 
 - Go inside the directory:
@@ -26,9 +33,10 @@ git clone ...
 cd go-crowdfunding
 ```
 
-- Run (development):
+- Run:
 
-```sh
+```go
+go run main.go
 ```
 
 ## Installed Package
