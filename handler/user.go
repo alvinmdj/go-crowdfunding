@@ -107,3 +107,7 @@ func (h *userHandler) LoginUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, response)
 }
+
+func CheckEmailAvailability(c *gin.Context) {
+	
+}
