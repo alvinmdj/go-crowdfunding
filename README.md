@@ -2,15 +2,17 @@
 
 ## Links
 
+- [Go](https://go.dev/)
 - [Gin](https://github.com/gin-gonic/gin)
 - [GORM](https://gorm.io/docs/)
 - [GORM - Connecting to a Database](https://gorm.io/docs/connecting_to_the_database.html)
 - [Gin - Model Binding & Validation](https://gin-gonic.com/docs/examples/binding-and-validation/)
+- [GoDotEnv](https://github.com/joho/godotenv)
 
 ## Requirements
 
-- Go v1.18+
-- MySQL
+- [Go v1.18+](https://go.dev/)
+- [MySQL](https://www.mysql.com/)
 
 ## Installation
 
@@ -20,11 +22,10 @@
 git clone https://github.com/alvinmdj/go-crowdfunding.git
 ```
 
-- Import ```go_crowdfunding.sql``` and setup db config:
+- Copy ```.env.example``` to ```.env``` and setup variables in ```.env```:
 
 ```sh
-# in main.go line 14
-dsn := "<db_username>:<db_password>@tcp(127.0.0.1:3306)/<db_name>?charset=utf8mb4&parseTime=True&loc=Local"
+cp .env.example .env
 ```
 
 - Go inside the directory:
@@ -41,7 +42,7 @@ go run main.go
 
 ## Installed Package
 
-- [Go Gin](https://github.com/gin-gonic/gin)
+- [Gin](https://github.com/gin-gonic/gin)
 
 ```go
 go get -u github.com/gin-gonic/gin
@@ -52,4 +53,10 @@ go get -u github.com/gin-gonic/gin
 ```go
 go get -u gorm.io/gorm
 go get -u gorm.io/driver/mysql
+```
+
+- [GoDotEnv](https://github.com/joho/godotenv)
+
+```go
+go get github.com/joho/godotenv
 ```
