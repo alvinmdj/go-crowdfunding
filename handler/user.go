@@ -1,9 +1,11 @@
 package handler
 
 import (
+	"fmt"
 	"go-crowdfunding/helper"
 	"go-crowdfunding/user"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -142,34 +144,69 @@ func (h *userHandler) CheckEmailAvailability(c *gin.Context) {
 		return
 	}
 
-	data := gin.H{
-		"is_available": isEmailAvailable,
-	}
+	data := gin.H{"is_available": isEmailAvailable}
 
 	metaMessage := "This email is already taken"
 	if isEmailAvailable {
 		metaMessage = "Email is available"
 	}
 
+	response := helper.APIResponse(metaMessage, http.StatusOK, "success", data)
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *userHandler) UploadAvatar(c *gin.Context) {
+	// get input from user (image) -> Form Data, not JSON
+	file, err := c.FormFile("avatar") // avatar is the name of the input
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse(
+			"Failed to upload avatar",
+			http.StatusBadRequest,
+			"error",
+			data,
+		)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	
+	userId := 1
+	path := fmt.Sprintf("images/%d-%d-%s", userId, time.Now().UnixNano(), file.Filename)
+
+	// save image in folder 'images/'
+	err = c.SaveUploadedFile(file, path)
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse(
+			"Failed to upload avatar",
+			http.StatusBadRequest,
+			"error",
+			data,
+		)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	// update user avatar in database
+	_, err = h.userService.SaveAvatar(userId, path)
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse(
+			"Failed to upload avatar",
+			http.StatusBadRequest,
+			"error",
+			data,
+		)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	data := gin.H{"is_uploaded": true}
 	response := helper.APIResponse(
-		metaMessage,
+		"Avatar has been uploaded",
 		http.StatusOK,
 		"success",
 		data,
 	)
 	c.JSON(http.StatusOK, response)
-}
-
-func (h *userHandler) UploadAvatar(c *gin.Context) {
-	// get input from user (image)
-
-	// save image in folder 'images/'
-
-	// use service to call repository
-
-	// JWT token (temporarily hardcoded)
-
-	// get user with ID = X in repository
-
-	// update user image with avatar location in repository
 }
