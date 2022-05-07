@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"fmt"
 	"go-crowdfunding/helper"
 	"os"
 
@@ -12,7 +11,10 @@ type Service interface {
 	GenerateToken(userId int) (string, error)
 }
 
-type jwtService struct {
+type jwtService struct{}
+
+func NewService() *jwtService {
+	return &jwtService{}
 }
 
 func (s *jwtService) GenerateToken(userId int) (string, error) {
@@ -23,7 +25,6 @@ func (s *jwtService) GenerateToken(userId int) (string, error) {
 
 	helper.LoadEnv()
 	jwtSecret := os.Getenv("JWT_SECRET")
-	fmt.Println("call jwt secret env from jwt service:", jwtSecret)
 
 	signedToken, err := token.SignedString([]byte(jwtSecret))
 	if err != nil {
