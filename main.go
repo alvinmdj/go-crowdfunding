@@ -3,25 +3,18 @@ package main
 import (
 	"fmt"
 	"go-crowdfunding/handler"
+	"go-crowdfunding/helper"
 	"go-crowdfunding/user"
 	"log"
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-func loadEnv() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-}
-
 func main() {
-	loadEnv()
+	helper.LoadEnv()
 	dbName := os.Getenv("DB_NAME")
 	dbUsername := os.Getenv("DB_USERNAME")
 	dbPassword := os.Getenv("DB_PASSWORD")
