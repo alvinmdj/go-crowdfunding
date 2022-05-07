@@ -169,8 +169,8 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	
-	userId := 1
+
+	userId := 1 // from JWT
 	path := fmt.Sprintf("images/%d-%d-%s", userId, time.Now().UnixNano(), file.Filename)
 
 	// save image in folder 'images/'

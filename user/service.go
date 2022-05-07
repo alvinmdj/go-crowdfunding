@@ -92,7 +92,7 @@ func (s *service) SaveAvatar(id int, fileLocation string) (User, error) {
 
 	// save avatar changes to db
 	updatedUser, err := s.repository.Update(user)
-	if  err != nil {
+	if err != nil {
 		return updatedUser, err
 	}
 

@@ -8,6 +8,8 @@
 - [GORM - Connecting to a Database](https://gorm.io/docs/connecting_to_the_database.html)
 - [Gin - Model Binding & Validation](https://gin-gonic.com/docs/examples/binding-and-validation/)
 - [GoDotEnv](https://github.com/joho/godotenv)
+- [Golang-JWT](https://github.com/golang-jwt/jwt)
+- [JWT](https://jwt.io/)
 
 ## Requirements
 
@@ -59,4 +61,10 @@ go get -u gorm.io/driver/mysql
 
 ```go
 go get github.com/joho/godotenv
+```
+
+- [Golang-JWT](https://github.com/golang-jwt/jwt)
+
+```go
+go get -u github.com/golang-jwt/jwt
 ```
