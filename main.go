@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-crowdfunding/auth"
 	"go-crowdfunding/handler"
 	"go-crowdfunding/helper"
 	"go-crowdfunding/user"
@@ -27,9 +28,11 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
+	authService := auth.NewService()
+
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
-	userHandler := handler.NewUserHandler(userService)
+	userHandler := handler.NewUserHandler(userService, authService)
 
 	router := gin.Default()
 	api := router.Group("/api/v1")
