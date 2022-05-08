@@ -162,8 +162,11 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 		return
 	}
 
-	userId := 1 // from JWT
-	path := fmt.Sprintf("images/%d-%d-%s", userId, time.Now().UnixNano(), file.Filename)
+	// get current user from context (from auth middleware)
+	currentUser := c.MustGet("currentUser").(user.User)
+	userId := currentUser.ID
+
+	path := fmt.Sprintf("images/%d-%d-%s", userId, time.Now().UnixMilli(), file.Filename)
 
 	// save image in folder 'images/'
 	err = c.SaveUploadedFile(file, path)
