@@ -45,6 +45,7 @@ func main() {
 	fmt.Println(len(campaigns))
 	for _, campaign := range campaigns {
 		fmt.Println(campaign.Name)
+		fmt.Println(campaign.CampaignImages[0].FileName)
 	}
 
 	router := gin.Default()

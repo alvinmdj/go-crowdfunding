@@ -6,6 +6,7 @@
 - [Gin](https://github.com/gin-gonic/gin)
 - [GORM](https://gorm.io/docs/)
 - [GORM - Connecting to a Database](https://gorm.io/docs/connecting_to_the_database.html)
+- [GORM - Preloading](https://gorm.io/docs/preload.html)
 - [Gin - Model Binding & Validation](https://gin-gonic.com/docs/examples/binding-and-validation/)
 - [GoDotEnv](https://github.com/joho/godotenv)
 - [Golang-JWT](https://github.com/golang-jwt/jwt)

@@ -18,7 +18,8 @@ func NewRepository(db *gorm.DB) *repository {
 func (r *repository) FindAll() ([]Campaign, error) {
 	var campaigns []Campaign
 
-	err := r.db.Find(&campaigns).Error
+	// Preload "CampaignImages" -> from Campaign struct entity, where campaign_images table's is_primary = 1
+	err := r.db.Preload("CampaignImages", "campaign_images.is_primary = 1").Find(&campaigns).Error
 	if err != nil {
 		return campaigns, err
 	}
@@ -29,7 +30,7 @@ func (r *repository) FindAll() ([]Campaign, error) {
 func (r *repository) FindByUserID(userId int) ([]Campaign, error) {
 	var campaigns []Campaign
 
-	err := r.db.Where("user_id = ?", userId).Find(&campaigns).Error
+	err := r.db.Where("user_id = ?", userId).Preload("CampaignImages", "campaign_images.is_primary = 1").Find(&campaigns).Error
 	if err != nil {
 		return campaigns, err
 	}
