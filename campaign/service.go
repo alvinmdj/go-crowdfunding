@@ -16,10 +16,13 @@ type service struct {
 	repository Repository
 }
 
+// Campaign service instance
 func NewService(repository Repository) *service {
 	return &service{repository}
 }
 
+// Service to get all campaigns
+// If User ID is set, only return campaigns that belong to that user
 func (s *service) GetCampaigns(userId int) ([]Campaign, error) {
 	if userId == 0 { // no userId, return all campaigns
 		campaigns, err := s.repository.FindAll()
@@ -36,6 +39,7 @@ func (s *service) GetCampaigns(userId int) ([]Campaign, error) {
 	return campaigns, nil
 }
 
+// Service to get campaign details
 func (s *service) GetCampaignByID(input GetCampaignDetailsInput) (Campaign, error) {
 	campaign, err := s.repository.FindByID(input.ID)
 
@@ -50,6 +54,7 @@ func (s *service) GetCampaignByID(input GetCampaignDetailsInput) (Campaign, erro
 	return campaign, nil
 }
 
+// Service to create a new campaign
 func (s *service) CreateCampaign(input CreateCampaignInput) (Campaign, error) {
 	// map input to Campaign struct
 	campaign := Campaign{}
@@ -66,9 +71,9 @@ func (s *service) CreateCampaign(input CreateCampaignInput) (Campaign, error) {
 
 	// check if campaign with same slug already exists
 	existingCampaign, err := s.repository.FindBySlug(campaign.Slug)
-	
+
 	if err != nil {
-	 	return existingCampaign, err
+		return existingCampaign, err
 	}
 
 	if existingCampaign.ID != 0 {

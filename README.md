@@ -26,16 +26,16 @@
 git clone https://github.com/alvinmdj/go-crowdfunding.git
 ```
 
-- Copy ```.env.example``` to ```.env``` and setup variables in ```.env```:
-
-```sh
-cp .env.example .env
-```
-
 - Go inside the directory:
 
 ```sh
 cd go-crowdfunding
+```
+
+- Copy ```.env.example``` to ```.env``` and setup variables in ```.env```:
+
+```sh
+cp .env.example .env
 ```
 
 - Run:

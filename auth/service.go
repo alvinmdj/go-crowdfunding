@@ -15,10 +15,12 @@ type Service interface {
 
 type jwtService struct{}
 
+// NewJWTService returns a new instance of the jwtService struct
 func NewService() *jwtService {
 	return &jwtService{}
 }
 
+// JWT Service to generate a new token
 func (s *jwtService) GenerateToken(userId int) (string, error) {
 	claim := jwt.MapClaims{}
 	claim["user_id"] = userId
@@ -36,6 +38,7 @@ func (s *jwtService) GenerateToken(userId int) (string, error) {
 	return signedToken, nil
 }
 
+// JWT Service to validate a token
 func (s *jwtService) ValidateToken(encodedToken string) (*jwt.Token, error) {
 	token, err := jwt.Parse(encodedToken, func(token *jwt.Token) (interface{}, error) {
 		_, ok := token.Method.(*jwt.SigningMethodHMAC)

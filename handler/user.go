@@ -16,10 +16,12 @@ type userHandler struct {
 	authService auth.Service
 }
 
+// User handler instance
 func NewUserHandler(userService user.Service, authService auth.Service) *userHandler {
 	return &userHandler{userService, authService}
 }
 
+// Handler to sign up a new user
 func (h *userHandler) RegisterUser(c *gin.Context) {
 	// get user input
 	var input user.RegisterUserInput
@@ -65,6 +67,7 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// Handler to sign in a user
 func (h *userHandler) LoginUser(c *gin.Context) {
 	// get user input (email & password) & map user input to LoginUserInput struct
 	var input user.LoginInput
@@ -111,6 +114,7 @@ func (h *userHandler) LoginUser(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// Handler to check email availability
 func (h *userHandler) CheckEmailAvailability(c *gin.Context) {
 	// get user input (email)
 	var input user.CheckEmailInput
@@ -150,6 +154,7 @@ func (h *userHandler) CheckEmailAvailability(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// Handler to upload user avatar
 func (h *userHandler) UploadAvatar(c *gin.Context) {
 	// get input from user (image) -> Form Data, not JSON
 	file, err := c.FormFile("avatar") // avatar is the name of the input

@@ -14,10 +14,12 @@ type repository struct {
 	db *gorm.DB
 }
 
+// Campaign repository instance
 func NewRepository(db *gorm.DB) *repository {
 	return &repository{db}
 }
 
+// Repository to get all campaigns
 func (r *repository) FindAll() ([]Campaign, error) {
 	var campaigns []Campaign
 
@@ -34,6 +36,7 @@ func (r *repository) FindAll() ([]Campaign, error) {
 	return campaigns, nil
 }
 
+// Repository to get campaigns by user ID
 func (r *repository) FindByUserID(userId int) ([]Campaign, error) {
 	var campaigns []Campaign
 
@@ -50,6 +53,7 @@ func (r *repository) FindByUserID(userId int) ([]Campaign, error) {
 	return campaigns, nil
 }
 
+// Repository to get campaign details
 func (r *repository) FindByID(id int) (Campaign, error) {
 	var campaign Campaign
 
@@ -67,6 +71,7 @@ func (r *repository) FindByID(id int) (Campaign, error) {
 	return campaign, nil
 }
 
+// Repository to check if slug is unique
 func (r *repository) FindBySlug(slug string) (Campaign, error) {
 	var campaign Campaign
 
@@ -79,6 +84,7 @@ func (r *repository) FindBySlug(slug string) (Campaign, error) {
 	return campaign, nil
 }
 
+// Repository to create a new campaign
 func (r *repository) Create(campaign Campaign) (Campaign, error) {
 	err := r.db.Create(&campaign).Error
 

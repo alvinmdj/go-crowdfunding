@@ -14,10 +14,12 @@ type campaignHandler struct {
 	campaignService campaign.Service
 }
 
+// Campaign handler instance
 func NewCampaignHandler(campaignService campaign.Service) *campaignHandler {
 	return &campaignHandler{campaignService}
 }
 
+// Handler to get all campaigns
 func (h *campaignHandler) GetCampaigns(c *gin.Context) {
 	userId, _ := strconv.Atoi(c.Query("user_id"))
 
@@ -38,6 +40,7 @@ func (h *campaignHandler) GetCampaigns(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// Handler to get campaign details
 func (h *campaignHandler) GetCampaignDetails(c *gin.Context) {
 	var input campaign.GetCampaignDetailsInput
 
@@ -68,6 +71,7 @@ func (h *campaignHandler) GetCampaignDetails(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// Handler to create a new campaign
 func (h *campaignHandler) CreateCampaign(c *gin.Context) {
 	var input campaign.CreateCampaignInput
 

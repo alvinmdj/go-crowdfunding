@@ -13,6 +13,7 @@ type CampaignFormatter struct {
 	Slug             string `json:"slug"`
 }
 
+// Format a single campaign
 func FormatCampaign(campaign Campaign) CampaignFormatter {
 	campaignFormatter := CampaignFormatter{
 		ID:               campaign.ID,
@@ -32,6 +33,7 @@ func FormatCampaign(campaign Campaign) CampaignFormatter {
 	return campaignFormatter
 }
 
+// Format slice of campaigns
 func FormatCampaigns(campaigns []Campaign) []CampaignFormatter {
 	campaignsFormatter := []CampaignFormatter{}
 
@@ -68,6 +70,7 @@ type CampaignImageFormatter struct {
 	IsPrimary bool   `json:"is_primary"`
 }
 
+// Format campaign details
 func FormatCampaignDetails(campaign Campaign) CampaignDetailsFormatter {
 	campaignDetailsFormatter := CampaignDetailsFormatter{
 		ID:               campaign.ID,

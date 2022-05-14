@@ -18,10 +18,12 @@ type service struct {
 	repository Repository
 }
 
+// User service instance
 func NewService(repository Repository) *service {
 	return &service{repository}
 }
 
+// Service to register a new user
 func (s *service) RegisterUser(input RegisterUserInput) (User, error) {
 	// mapping input struct to User struct
 	user := User{}
@@ -45,6 +47,7 @@ func (s *service) RegisterUser(input RegisterUserInput) (User, error) {
 	return newUser, nil
 }
 
+// Service to login a user
 func (s *service) Login(input LoginInput) (User, error) {
 	email := input.Email
 	password := input.Password
@@ -66,6 +69,7 @@ func (s *service) Login(input LoginInput) (User, error) {
 	return user, nil
 }
 
+// Service to check if email is available
 func (s *service) IsEmailAvailable(input CheckEmailInput) (bool, error) {
 	email := input.Email
 
@@ -81,6 +85,7 @@ func (s *service) IsEmailAvailable(input CheckEmailInput) (bool, error) {
 	return false, nil
 }
 
+// Service to save avatar
 func (s *service) SaveAvatar(id int, fileLocation string) (User, error) {
 	// get user by id
 	user, err := s.repository.FindById(id)
@@ -100,6 +105,7 @@ func (s *service) SaveAvatar(id int, fileLocation string) (User, error) {
 	return updatedUser, nil
 }
 
+// Service to get user by id
 func (s *service) GetUserById(id int) (User, error) {
 	user, err := s.repository.FindById(id)
 	if err != nil {
