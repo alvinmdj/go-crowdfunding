@@ -45,6 +45,7 @@ func main() {
 	router := gin.Default()
 
 	router.Static("/avatars", "./public/images/avatars")
+	router.Static("/campaign-images", "./public/images/campaign-images")
 
 	api := router.Group("/api/v1")
 
@@ -59,6 +60,7 @@ func main() {
 	api.GET("/campaigns/:id", campaignHandler.GetCampaignDetails)
 	api.POST("/campaigns", authMiddleware(authService, userService), campaignHandler.CreateCampaign)
 	api.PUT("/campaigns/:id", authMiddleware(authService, userService), campaignHandler.UpdateCampaign)
+	api.POST("/campaign-images", authMiddleware(authService, userService), campaignHandler.UploadCampaignImage)
 
 	router.Run()
 }

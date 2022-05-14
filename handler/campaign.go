@@ -1,11 +1,13 @@
 package handler
 
 import (
+	"fmt"
 	"go-crowdfunding/campaign"
 	"go-crowdfunding/helper"
 	"go-crowdfunding/user"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -159,10 +161,63 @@ func (h *campaignHandler) UpdateCampaign(c *gin.Context) {
 }
 
 // Handler to upload campaign image
-// handler:
-// 1. get input and map to input struct
-// 2. save image to folder
-// service (condition to call repository no.2, call repository no.1)
-// repository:
-// 1. save image to table campaign_images
-// 2. set is_primary : true -> false
+func (h *campaignHandler) UploadCampaignImage(c *gin.Context) {
+	var input campaign.CreateCampaignImageInput
+
+	err := c.ShouldBind(&input) // use 'c.ShouldBind' to bind form data
+	if err != nil {
+		errors := helper.FormatValidationError(err)
+		errorMessage := gin.H{"errors": errors}
+		response := helper.APIResponse(
+			"Failed to upload campaign image", http.StatusUnprocessableEntity, "error", errorMessage,
+		)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	// get current user from context (from auth middleware)
+	currentUser := c.MustGet("currentUser").(user.User)
+	input.User = currentUser // add current user to input
+	userId := currentUser.ID // for image name
+
+	// get image input from Form Data, not JSON
+	file, err := c.FormFile("file") // file is the name of the input
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse(
+			"Failed to upload campaign image", http.StatusBadRequest, "error", data,
+		)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	// save campaign image in folder 'public/images/campaign-images/'
+	rootPath := fmt.Sprintf("public/images/campaign-images/%d-%d-%s", userId, time.Now().UnixMilli(), file.Filename)
+	err = c.SaveUploadedFile(file, rootPath)
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse(
+			"Failed to upload campaign image", http.StatusBadRequest, "error", data,
+		)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	// save campaign image in database (path: campaign-images/filename.extension)
+	relativePath := fmt.Sprintf("campaign-images/%d-%d-%s", userId, time.Now().UnixMilli(), file.Filename)
+	_, err = h.campaignService.CreateCampaignImage(input, relativePath)
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse(
+			"Failed to upload campaign image", http.StatusBadRequest, "error", data,
+		)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	data := gin.H{"is_uploaded": true}
+	response := helper.APIResponse(
+		"Campaign image has been uploaded", http.StatusOK, "success", data,
+	)
+	c.JSON(http.StatusOK, response)
+}

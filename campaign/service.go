@@ -101,7 +101,7 @@ func (s *service) UpdateCampaign(inputId GetCampaignDetailsInput, inputData Crea
 
 	// check if current user is the owner of the campaign
 	if campaign.UserID != inputData.User.ID {
-		return campaign, errors.New("unauthorized to update this campaign")
+		return campaign, errors.New("you are not authorized to modify this campaign")
 	}
 
 	// map input to Campaign struct
@@ -121,6 +121,15 @@ func (s *service) UpdateCampaign(inputId GetCampaignDetailsInput, inputData Crea
 
 // Service to create a new campaign image
 func (s *service) CreateCampaignImage(input CreateCampaignImageInput, fileLocation string) (CampaignImage, error) {
+	campaign, err := s.repository.FindByID(input.CampaignID)
+	if err != nil {
+		return CampaignImage{}, err
+	}
+
+	if campaign.UserID != input.User.ID {
+		return CampaignImage{}, errors.New("you are not authorized to modify this campaign")
+	}
+
 	// check if campaign image is primary
 	isPrimary := 0
 	if input.IsPrimary {
