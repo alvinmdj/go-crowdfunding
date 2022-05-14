@@ -157,3 +157,12 @@ func (h *campaignHandler) UpdateCampaign(c *gin.Context) {
 	)
 	c.JSON(http.StatusOK, response)
 }
+
+// Handler to upload campaign image
+// handler:
+// 1. get input and map to input struct
+// 2. save image to folder
+// service (condition to call repository no.2, call repository no.1)
+// repository:
+// 1. save image to table campaign_images
+// 2. set is_primary : true -> false

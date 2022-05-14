@@ -9,7 +9,8 @@ type Repository interface {
 	FindBySlug(slug string) (Campaign, error)
 	Create(campaign Campaign) (Campaign, error)
 	Update(campaign Campaign) (Campaign, error)
-	// Delete(id int) error
+	CreateImage(campaignImage CampaignImage) (CampaignImage, error)
+	MarkAllImagesAsNotPrimary(campaignId int) (bool, error)
 }
 
 type repository struct {
@@ -106,6 +107,29 @@ func (r *repository) Update(campaign Campaign) (Campaign, error) {
 	}
 
 	return campaign, nil
+}
+
+// Repository to create a new campaign image
+func (r *repository) CreateImage(campaignImage CampaignImage) (CampaignImage, error) {
+	err := r.db.Create(&campaignImage).Error
+
+	if err != nil {
+		return campaignImage, err
+	}
+
+	return campaignImage, nil
+}
+
+// Repository to mark all images as not primary
+func (r *repository) MarkAllImagesAsNotPrimary(campaignId int) (bool, error) {
+	// UPDATE campaign_images SET is_primary = 0 WHERE campaign_id = ?
+	err := r.db.Model(&CampaignImage{}).Where("campaign_id = ?", campaignId).Update("is_primary", 0).Error
+
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
 }
 
 // ! Repository to delete a campaign
