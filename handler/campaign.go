@@ -3,6 +3,7 @@ package handler
 import (
 	"go-crowdfunding/campaign"
 	"go-crowdfunding/helper"
+	"go-crowdfunding/user"
 	"net/http"
 	"strconv"
 
@@ -67,7 +68,38 @@ func (h *campaignHandler) GetCampaignDetails(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
-// get body data from user and map it to input struct
-// get current user id from jwt/handler
-// call service : input struct & create slug
-// call repository : save campaign data to db
+func (h *campaignHandler) CreateCampaign(c *gin.Context) {
+	var input campaign.CreateCampaignInput
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		errors := helper.FormatValidationError(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := helper.APIResponse(
+			"Failed to create campaign", http.StatusUnprocessableEntity, "error", errorMessage,
+		)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	// get current user from context
+	currentUser := c.MustGet("currentUser").(user.User)
+	input.User = currentUser
+
+	newCampaign, err := h.campaignService.CreateCampaign(input)
+	if err != nil {
+		errorMessage := gin.H{"errors": err.Error()}
+		response := helper.APIResponse(
+			"Failed to create campaign", http.StatusBadRequest, "error", errorMessage,
+		)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	formatter := campaign.FormatCampaign(newCampaign)
+	response := helper.APIResponse(
+		"Campaign created", http.StatusOK, "success", formatter,
+	)
+	c.JSON(http.StatusOK, response)
+}
