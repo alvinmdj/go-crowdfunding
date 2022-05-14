@@ -1,6 +1,7 @@
 package campaign
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/gosimple/slug"
@@ -95,6 +96,11 @@ func (s *service) UpdateCampaign(inputId GetCampaignDetailsInput, inputData Crea
 	campaign, err := s.repository.FindByID(inputId.ID)
 	if err != nil {
 		return campaign, err
+	}
+
+	// check if current user is the owner of the campaign
+	if campaign.UserID != inputData.User.ID {
+		return campaign, errors.New("unauthorized to update this campaign")
 	}
 
 	// map input to Campaign struct

@@ -91,6 +91,7 @@ func (h *campaignHandler) CreateCampaign(c *gin.Context) {
 	currentUser := c.MustGet("currentUser").(user.User)
 	input.User = currentUser
 
+	// call service to create campaign
 	newCampaign, err := h.campaignService.CreateCampaign(input)
 	if err != nil {
 		errorMessage := gin.H{"errors": err.Error()}
@@ -135,11 +136,16 @@ func (h *campaignHandler) UpdateCampaign(c *gin.Context) {
 		return
 	}
 
+	// get current user from context
+	currentUser := c.MustGet("currentUser").(user.User)
+	inputData.User = currentUser
+
 	// call service to update campaign
 	updatedCampaign, err := h.campaignService.UpdateCampaign(inputId, inputData)
 	if err != nil {
+		errorMessage := gin.H{"errors": err.Error()}
 		response := helper.APIResponse(
-			"Failed to update campaign", http.StatusBadRequest, "error", nil,
+			"Failed to update campaign", http.StatusBadRequest, "error", errorMessage,
 		)
 		c.JSON(http.StatusBadRequest, response)
 		return
