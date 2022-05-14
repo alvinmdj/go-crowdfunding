@@ -10,7 +10,7 @@ type Service interface {
 	GetCampaigns(userId int) ([]Campaign, error)
 	GetCampaignByID(input GetCampaignDetailsInput) (Campaign, error)
 	CreateCampaign(input CreateCampaignInput) (Campaign, error)
-	Update(inputID GetCampaignDetailsInput, inputData CreateCampaignInput) (Campaign, error)
+	UpdateCampaign(inputId GetCampaignDetailsInput, inputData CreateCampaignInput) (Campaign, error)
 }
 
 type service struct {
@@ -90,9 +90,9 @@ func (s *service) CreateCampaign(input CreateCampaignInput) (Campaign, error) {
 }
 
 // Service to update a campaign
-func (s *service) Update(inputID GetCampaignDetailsInput, inputData CreateCampaignInput) (Campaign, error) {
+func (s *service) UpdateCampaign(inputId GetCampaignDetailsInput, inputData CreateCampaignInput) (Campaign, error) {
 	// get campaign by ID
-	campaign, err := s.repository.FindByID(inputID.ID)
+	campaign, err := s.repository.FindByID(inputId.ID)
 	if err != nil {
 		return campaign, err
 	}
