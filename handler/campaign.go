@@ -38,11 +38,6 @@ func (h *campaignHandler) GetCampaigns(c *gin.Context) {
 }
 
 func (h *campaignHandler) GetCampaignDetails(c *gin.Context) {
-	// api/v1/campaings/{id}
-	// handler : mapping id from url to input struct -> service, call formatter
-	// service : input struct -> get id from url -> call repo
-	// repository : get campaign by id
-
 	var input campaign.GetCampaignDetailsInput
 
 	err := c.ShouldBindUri(&input)
@@ -71,3 +66,8 @@ func (h *campaignHandler) GetCampaignDetails(c *gin.Context) {
 	)
 	c.JSON(http.StatusOK, response)
 }
+
+// get body data from user and map it to input struct
+// get current user id from jwt/handler
+// call service : input struct & create slug
+// call repository : save campaign data to db

@@ -6,6 +6,7 @@ type Repository interface {
 	FindAll() ([]Campaign, error)
 	FindByUserID(userId int) ([]Campaign, error)
 	FindByID(id int) (Campaign, error)
+	Create(campaign Campaign) (Campaign, error)
 }
 
 type repository struct {
@@ -57,6 +58,16 @@ func (r *repository) FindByID(id int) (Campaign, error) {
 		Where("id = ?", id).
 		Find(&campaign).
 		Error
+
+	if err != nil {
+		return campaign, err
+	}
+
+	return campaign, nil
+}
+
+func (r *repository) Create(campaign Campaign) (Campaign, error) {
+	err := r.db.Create(&campaign).Error
 
 	if err != nil {
 		return campaign, err
