@@ -8,6 +8,8 @@ type Repository interface {
 	FindByID(id int) (Campaign, error)
 	FindBySlug(slug string) (Campaign, error)
 	Create(campaign Campaign) (Campaign, error)
+	Update(campaign Campaign) (Campaign, error)
+	// Delete(id int) error
 }
 
 type repository struct {
@@ -94,3 +96,26 @@ func (r *repository) Create(campaign Campaign) (Campaign, error) {
 
 	return campaign, nil
 }
+
+// Repository to update a campaign
+func (r *repository) Update(campaign Campaign) (Campaign, error) {
+	err := r.db.Save(&campaign).Error
+
+	if err != nil {
+		return campaign, err
+	}
+
+	return campaign, nil
+}
+
+// ! Repository to delete a campaign
+// ! Currently not in use
+// func (r *repository) Delete(id int) error {
+// 	err := r.db.Delete(&Campaign{}, "id = ?", id).Error
+
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	return nil
+// }
