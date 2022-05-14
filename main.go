@@ -42,6 +42,21 @@ func main() {
 	campaignService := campaign.NewService(campaignRepository)
 	campaignHandler := handler.NewCampaignHandler(campaignService)
 
+	inputUser, _ := userService.GetUserById(2)
+	fmt.Println("input user:", inputUser)
+	input := campaign.CreateCampaignInput{
+		Name:             "Crowdfunding for start up",
+		ShortDescription: "Startup is a new company",
+		Description:      "Startup is a new company and we need to raise money for it",
+		GoalAmount:       100000000,
+		Perks:            "reward 1, reward 2, reward 3",
+		User:             inputUser,
+	}
+	_, err = campaignService.CreateCampaign(input)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
 	router := gin.Default()
 
 	router.Static("/avatars", "./public/images/avatars")
