@@ -64,6 +64,17 @@ func (s *service) CreateCampaign(input CreateCampaignInput) (Campaign, error) {
 	slugCandidate := fmt.Sprintf("%s %d", input.Name, input.User.ID)
 	campaign.Slug = slug.Make(slugCandidate)
 
+	// check if campaign with same slug already exists
+	existingCampaign, err := s.repository.FindBySlug(campaign.Slug)
+	
+	if err != nil {
+	 	return existingCampaign, err
+	}
+
+	if existingCampaign.ID != 0 {
+		return existingCampaign, fmt.Errorf("Campaign with slug %s already exists", campaign.Slug)
+	}
+
 	newCampaign, err := s.repository.Create(campaign)
 	if err != nil {
 		return newCampaign, err
