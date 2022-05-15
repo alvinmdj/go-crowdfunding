@@ -40,10 +40,10 @@ func (h *transactionHandler) GetCampaignTransactions(c *gin.Context) {
 		return
 	}
 
-	// formatter := transaction.FormatCampaignTransactions(transactions)
+	formatter := transaction.FormatCampaignTransactions(transactions)
 
 	response := helper.APIResponse(
-		"Campaign transactions", http.StatusOK, "success", transactions,
+		"Campaign transactions", http.StatusOK, "success", formatter,
 	)
 	c.JSON(http.StatusOK, response)
 }
