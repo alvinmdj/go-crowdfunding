@@ -32,6 +32,12 @@ git clone https://github.com/alvinmdj/go-crowdfunding.git
 cd go-crowdfunding
 ```
 
+- Get all required dependencies
+
+```go
+go get .
+```
+
 - Copy ```.env.example``` to ```.env``` and setup variables in ```.env```:
 
 ```sh
@@ -42,6 +48,8 @@ cp .env.example .env
 
 ```go
 go run main.go
+// or 
+go run .
 ```
 
 ## Installed Package
