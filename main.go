@@ -46,6 +46,9 @@ func main() {
 	campaignService := campaign.NewService(campaignRepository)
 	campaignHandler := handler.NewCampaignHandler(campaignService)
 
+	// setup transaction
+	// transactionRepository := transaction.NewRepository(db)
+
 	// setup router
 	router := gin.Default()
 

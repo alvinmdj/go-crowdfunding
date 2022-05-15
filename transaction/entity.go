@@ -1,6 +1,7 @@
 package transaction
 
 import (
+	"go-crowdfunding/user"
 	"time"
 )
 
@@ -13,4 +14,5 @@ type Transaction struct {
 	Code       string
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
+	User       user.User
 }
