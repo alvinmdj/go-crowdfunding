@@ -32,10 +32,16 @@ git clone https://github.com/alvinmdj/go-crowdfunding.git
 cd go-crowdfunding
 ```
 
-- Get all required dependencies
+- Get all dependencies:
 
 ```go
 go get .
+```
+
+- Create MySQL database by importing ```go_crowdfunding.sql```:
+
+```go
+// Import go_crowdfunding.sql from /config/db/go_crowdfunding.sql
 ```
 
 - Copy ```.env.example``` to ```.env``` and setup variables in ```.env```:
