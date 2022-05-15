@@ -49,7 +49,7 @@ func main() {
 
 	// setup transaction
 	transactionRepository := transaction.NewRepository(db)
-	transactionService := transaction.NewService(transactionRepository)
+	transactionService := transaction.NewService(transactionRepository, campaignRepository)
 	transactionHandler := handler.NewTransactionHandler(transactionService)
 
 	// setup router
