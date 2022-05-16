@@ -12,6 +12,9 @@
 - [GoSimple - Slug](https://github.com/gosimple/slug)
 - [Golang-JWT](https://github.com/golang-jwt/jwt)
 - [JWT](https://jwt.io/)
+- [Midtrans](https://midtrans.com/)
+- [Go Midtrans](https://github.com/veritrans/go-midtrans)
+- [Midtrans Docs Snap API](https://snap-docs.midtrans.com/)
 
 ## Requirements
 
