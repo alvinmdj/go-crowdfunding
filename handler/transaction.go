@@ -70,13 +70,10 @@ func (h *transactionHandler) GetUserTransactions(c *gin.Context) {
 		return
 	}
 
+	formatter := transaction.FormatUserTransactions(transactions)
+
 	response := helper.APIResponse(
-		"Campaign transactions", http.StatusOK, "success", transactions,
+		"User transactions", http.StatusOK, "success", formatter,
 	)
 	c.JSON(http.StatusOK, response)
 }
-// GetUserTransactions
-// handler
-// get user id from auth middleware
-// service
-// repository -> get transactions by that user, preload campaign
