@@ -54,3 +54,9 @@ func (h *transactionHandler) GetCampaignTransactions(c *gin.Context) {
 	)
 	c.JSON(http.StatusOK, response)
 }
+
+// GetUserTransactions
+// handler
+// get user id from auth middleware
+// service
+// repository -> get transactions by that user, preload campaign
