@@ -2,12 +2,16 @@ package transaction
 
 import (
 	"errors"
+	"fmt"
+	"time"
+
 	"go-crowdfunding/campaign"
 )
 
 type Service interface {
 	GetTransactionsByCampaignID(input GetCampaignTransactionsInput) ([]Transaction, error)
 	GetTransactionsByUserID(userId int) ([]Transaction, error)
+	CreateTransaction(input CreateTransactionInput) (Transaction, error)
 }
 
 type service struct {
@@ -51,4 +55,23 @@ func (s *service) GetTransactionsByUserID(userId int) ([]Transaction, error) {
 	}
 
 	return transactions, nil
+}
+
+// Service to create transaction
+func (s *service) CreateTransaction(input CreateTransactionInput) (Transaction, error) {
+	// map input to Transaction struct
+	transaction := Transaction{}
+	transaction.Amount = input.Amount
+	transaction.CampaignID = input.CampaignID
+	transaction.UserID = input.User.ID
+	transaction.Status = "pending"
+	transaction.Code = fmt.Sprintf("TRX-%d%d%d", input.CampaignID, input.User.ID, time.Now().UnixMilli())
+
+	// call repository to create transaction
+	newTransaction, err := s.repository.Create(transaction)
+	if err != nil {
+		return newTransaction, err
+	}
+
+	return newTransaction, nil
 }
