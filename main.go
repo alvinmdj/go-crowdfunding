@@ -52,15 +52,6 @@ func main() {
 	transactionService := transaction.NewService(transactionRepository, campaignRepository)
 	transactionHandler := handler.NewTransactionHandler(transactionService)
 
-	// test create transaction service
-	user, _ := userService.GetUserById(1)
-	input := transaction.CreateTransactionInput{
-		CampaignID: 5,
-		Amount:     1500000,
-		User:       user,
-	}
-	transactionService.CreateTransaction(input)
-
 	// setup router
 	router := gin.Default()
 
@@ -87,6 +78,7 @@ func main() {
 	// transaction routes
 	api.GET("/campaigns/:id/transactions", authMiddleware(authService, userService), transactionHandler.GetCampaignTransactions)
 	api.GET("/transactions", authMiddleware(authService, userService), transactionHandler.GetUserTransactions)
+	api.POST("/transactions", authMiddleware(authService, userService), transactionHandler.CreateTransaction)
 
 	router.Run()
 }
