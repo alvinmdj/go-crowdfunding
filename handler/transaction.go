@@ -55,6 +55,7 @@ func (h *transactionHandler) GetCampaignTransactions(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// Handler to get transactions by user ID
 func (h *transactionHandler) GetUserTransactions(c *gin.Context) {
 	// get current user from context
 	currentUser := c.MustGet("currentUser").(user.User)
@@ -77,3 +78,8 @@ func (h *transactionHandler) GetUserTransactions(c *gin.Context) {
 	)
 	c.JSON(http.StatusOK, response)
 }
+
+// input from user
+// handler get input & map to input struct
+// call service for transaction, call midtrans system
+// service call repository create new transaction data
