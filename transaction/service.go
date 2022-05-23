@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"go-crowdfunding/campaign"
+	"go-crowdfunding/payment"
 )
 
 type Service interface {
@@ -17,11 +18,12 @@ type Service interface {
 type service struct {
 	repository         Repository
 	campaignRepository campaign.Repository
+	paymentService     payment.Service
 }
 
 // Transaction service instance
-func NewService(repository Repository, campaignRepository campaign.Repository) *service {
-	return &service{repository, campaignRepository}
+func NewService(repository Repository, campaignRepository campaign.Repository, paymentService payment.Service) *service {
+	return &service{repository, campaignRepository, paymentService}
 }
 
 // Service to get transactions by campaign ID
@@ -69,6 +71,25 @@ func (s *service) CreateTransaction(input CreateTransactionInput) (Transaction, 
 
 	// call repository to create transaction
 	newTransaction, err := s.repository.Create(transaction)
+	if err != nil {
+		return newTransaction, err
+	}
+
+	// map new transaction to payment.Transaction struct
+	paymentTransaction := payment.Transaction{
+		Code:   newTransaction.Code,
+		Amount: newTransaction.Amount,
+	}
+
+	// call payment service to get payment URL
+	paymentUrl, err := s.paymentService.GetPaymentURL(paymentTransaction, input.User)
+	if err != nil {
+		return newTransaction, err
+	}
+
+	// update transaction with payment URL
+	newTransaction.PaymentURL = paymentUrl
+	newTransaction, err = s.repository.Update(newTransaction)
 	if err != nil {
 		return newTransaction, err
 	}

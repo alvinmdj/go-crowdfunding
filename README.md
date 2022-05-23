@@ -93,3 +93,9 @@ go get -u github.com/golang-jwt/jwt
 ```go
 go get -u github.com/gosimple/slug
 ```
+
+- [Go Midtrans](https://github.com/veritrans/go-midtrans)
+
+```go
+go get -u github.com/veritrans/go-midtrans
+```

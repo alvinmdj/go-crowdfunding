@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2022 at 07:15 AM
+-- Generation Time: May 23, 2022 at 04:23 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -42,6 +42,18 @@ CREATE TABLE `campaigns` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `campaigns`
+--
+
+INSERT INTO `campaigns` (`id`, `user_id`, `name`, `short_description`, `description`, `perks`, `backer_count`, `goal_amount`, `current_amount`, `slug`, `created_at`, `updated_at`) VALUES
+(1, 1, 'test CaMpaIgn POSTMAN different SLuG', 'campaign test from postman', 'long description', 'perks 1, perks 2, perks 3', 0, 10000000, 0, 'test-campaign-postman-different-slug-1', '2022-05-14 12:55:20', '2022-05-14 12:55:20'),
+(2, 1, 'test CaMpaIgn POSTMAN', 'campaign test from postman Updated', 'long description Updated', 'perks 1, perks 2, perks 3, perks 4, perks 5', 0, 999000000, 0, 'campaign-two', '2022-05-10 15:53:42', '2022-05-14 15:57:16'),
+(3, 2, 'Campaign 3', 'testt', 'testsadsadasd', 'perk1, 213, 213123', 0, 20100000, 0, 'campaign-three', '2022-05-10 15:55:35', '2022-05-10 15:55:35'),
+(4, 1, 'Crowdfunding for start up', 'Startup is a new company', 'Startup is a new company and we need to raise money for it', 'reward 1, reward 2, reward 3', 0, 100000000, 0, 'crowdfunding-for-start-up-1', '2022-05-14 12:21:59', '2022-05-14 12:21:59'),
+(5, 2, 'Crowdfunding for start up', 'Startup is a new company', 'Startup is a new company and we need to raise money for it', 'reward 1, reward 2, reward 3', 0, 100000000, 0, 'crowdfunding-for-start-up-2', '2022-05-14 12:23:54', '2022-05-14 12:23:54'),
+(6, 1, 'test CaMpaIgn POSTMAN', 'campaign test from postman', 'long description', 'perks 1, perks 2, perks 3', 0, 10000000, 0, 'test-campaign-postman-1', '2022-05-14 12:46:31', '2022-05-14 12:46:31');
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +69,13 @@ CREATE TABLE `campaign_images` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `campaign_images`
+--
+
+INSERT INTO `campaign_images` (`id`, `campaign_id`, `file_name`, `is_primary`, `created_at`, `updated_at`) VALUES
+(9, 1, 'campaign-images/1-1652542455367-profile.png', 1, '2022-05-14 22:34:15', '2022-05-14 22:34:15');
+
 -- --------------------------------------------------------
 
 --
@@ -70,9 +89,21 @@ CREATE TABLE `transactions` (
   `amount` int(11) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL,
+  `payment_url` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `campaign_id`, `user_id`, `amount`, `status`, `code`, `payment_url`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 100000, 'paid', NULL, '', '2022-05-15 16:42:09', '2022-05-15 16:42:09'),
+(2, 1, 2, 350000, 'pending', NULL, '', '2022-05-15 16:42:09', '2022-05-15 16:42:09'),
+(3, 1, 1, 500000, 'pending', NULL, '', '2022-05-15 16:58:44', '2022-05-15 16:58:44'),
+(4, 5, 1, 1500000, 'pending', 'TRX-511653142571370', '', '2022-05-21 21:16:11', '2022-05-21 21:16:11'),
+(5, 2, 1, 10000000, 'pending', 'TRX-211653143563270', '', '2022-05-21 21:32:43', '2022-05-21 21:32:43');
 
 -- --------------------------------------------------------
 
@@ -92,6 +123,14 @@ CREATE TABLE `users` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `occupation`, `email`, `password_hash`, `avatar_file_name`, `role`, `token`, `created_at`, `updated_at`) VALUES
+(1, 'Alvin Martin', 'Developer', 'alvin@gmail.com', '$2a$04$q0yIbLB6T1HLb6qghWDCi.McuB8R3UvooXRGwsK4RJdwgjyjE0DYi', 'avatars/1-1652368121492-profile2.png', 'user', '', '2022-05-04 21:56:35', '2022-05-12 22:08:41'),
+(2, 'Veiros', 'Gamers', 'veiros@gmail.com', '$2a$04$FbLO/mWF8AX1tcw7YRwoeOi8/JuoeqgjmoKPUHk7v2YMOvKr15c8K', 'avatars/2-1652021866887-profile.png', 'user', '', '2022-05-07 15:02:10', '2022-05-08 21:53:15');
 
 --
 -- Indexes for dumped tables
@@ -129,25 +168,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `campaigns`
 --
 ALTER TABLE `campaigns`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `campaign_images`
 --
 ALTER TABLE `campaign_images`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
