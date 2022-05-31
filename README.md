@@ -15,6 +15,8 @@
 - [Midtrans](https://midtrans.com/)
 - [Go Midtrans](https://github.com/veritrans/go-midtrans)
 - [Midtrans Docs Snap API](https://snap-docs.midtrans.com/)
+- [Midtrans Docs Handle After Payment HTTP(S) Notification](https://docs.midtrans.com/en/after-payment/http-notification)
+- [ngrok](https://ngrok.com/)
 
 ## Requirements
 
@@ -61,7 +63,7 @@ go run main.go
 go run .
 ```
 
-## Installed Package
+## Installed Packages
 
 - [Gin](https://github.com/gin-gonic/gin)
 
@@ -98,4 +100,21 @@ go get -u github.com/gosimple/slug
 
 ```go
 go get -u github.com/veritrans/go-midtrans
+```
+
+## ngrok Commands
+
+- Help
+
+```sh
+ngrok help
+```
+
+- Run
+
+```sh
+ngrok http <port>
+
+# example
+ngrok http 8080
 ```
