@@ -115,3 +115,29 @@ func (h *transactionHandler) CreateTransaction(c *gin.Context) {
 	)
 	c.JSON(http.StatusOK, response)
 }
+
+// Handler to get payment notification from Midtrans
+func (h *transactionHandler) GetNotification(c *gin.Context) {
+	var input transaction.TransactionNotificationInput
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		response := helper.APIResponse(
+			"Failed to process notification", http.StatusBadRequest, "error", nil,
+		)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	err = h.transactionService.ProcessPayment(input)
+	if err != nil {
+		response := helper.APIResponse(
+			"Failed to process notification", http.StatusBadRequest, "error", nil,
+		)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	// return success response to Midtrans, not to user
+	c.JSON(http.StatusOK, input)
+}

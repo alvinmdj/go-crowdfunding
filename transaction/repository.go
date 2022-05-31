@@ -5,6 +5,7 @@ import "gorm.io/gorm"
 type Repository interface {
 	FindByCampaignID(campaignId int) ([]Transaction, error)
 	FindByUserID(userId int) ([]Transaction, error)
+	FindByCode(transactionCode string) (Transaction, error)
 	Create(transaction Transaction) (Transaction, error)
 	Update(transaction Transaction) (Transaction, error)
 }
@@ -53,6 +54,18 @@ func (r *repository) FindByUserID(userId int) ([]Transaction, error) {
 	}
 
 	return transactions, nil
+}
+
+// Repository to get transaction by transaction code
+func (r *repository) FindByCode(transactionCode string) (Transaction, error) {
+	var transaction Transaction
+
+	err := r.db.Where("code = ?", transactionCode).Find(&transaction).Error
+	if err != nil {
+		return transaction, err
+	}
+
+	return transaction, nil
 }
 
 // Repository to create transaction

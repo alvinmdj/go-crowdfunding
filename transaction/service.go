@@ -13,6 +13,7 @@ type Service interface {
 	GetTransactionsByCampaignID(input GetCampaignTransactionsInput) ([]Transaction, error)
 	GetTransactionsByUserID(userId int) ([]Transaction, error)
 	CreateTransaction(input CreateTransactionInput) (Transaction, error)
+	ProcessPayment(input TransactionNotificationInput) error
 }
 
 type service struct {
@@ -95,4 +96,49 @@ func (s *service) CreateTransaction(input CreateTransactionInput) (Transaction, 
 	}
 
 	return newTransaction, nil
+}
+
+// Process payment notification
+func (s *service) ProcessPayment(input TransactionNotificationInput) error {
+	transactionId := input.OrderID
+
+	transaction, err := s.repository.FindByCode(transactionId)
+	if err != nil {
+		return err
+	}
+
+	if input.PaymentType == "credit_card" && input.TransactionStatus == "capture" && input.FraudStatus == "accept" {
+		transaction.Status = "paid"
+	} else if input.TransactionStatus == "settlement" {
+		transaction.Status = "paid"
+	} else if input.TransactionStatus == "deny" || input.TransactionStatus == "expire" || input.TransactionStatus == "cancel" {
+		transaction.Status = "canceled"
+	} else {
+		transaction.Status = "pending"
+	}
+
+	// Update transaction status
+	updatedTransaction, err := s.repository.Update(transaction)
+	if err != nil {
+		return err
+	}
+
+	// Get campaign for this transaction
+	campaign, err := s.campaignRepository.FindByID(updatedTransaction.CampaignID)
+	if err != nil {
+		return err
+	}
+
+	// Update campaign
+	if updatedTransaction.Status == "paid" {
+		campaign.BackerCount += 1
+		campaign.CurrentAmount += updatedTransaction.Amount
+
+		_, err := s.campaignRepository.Update(campaign)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

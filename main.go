@@ -84,7 +84,7 @@ func main() {
 	api.GET("/transactions", authMiddleware(authService, userService), transactionHandler.GetUserTransactions)
 	api.POST("/transactions", authMiddleware(authService, userService), transactionHandler.CreateTransaction)
 
-	router.Run()
+	router.Run(":8080") // default port 8080
 }
 
 // authMiddleware is a middleware function that checks if the user is authenticated.
