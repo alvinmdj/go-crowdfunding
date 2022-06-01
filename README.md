@@ -134,3 +134,17 @@ ngrok http 8080
 # Setup in Midtrans Configuration - Payment Notification URL:
 # <ngrok-url>/api/v1/transactions/notification
 ```
+
+- Required Environment Variables on Heroku:
+
+```sh
+APP_ENV=production
+GOVERSION=go1.18
+DB_HOST=
+DB_NAME=
+DB_USERNAME=
+DB_PASSWORD=
+JWT_SECRET=
+MIDTRANS_CLIENT_KEY=
+MIDTRANS_SERVER_KEY=
+```
