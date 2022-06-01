@@ -1,5 +1,9 @@
 # Go Crowdfunding
 
+Back-end with Go Gin web framework.
+
+API: [API Documentation (Postman)](https://documenter.getpostman.com/view/16534190/Uz5DrdeP)
+
 ## Links
 
 - [Go](https://go.dev/)
@@ -23,6 +27,7 @@
 
 - [Go v1.18+](https://go.dev/)
 - [MySQL](https://www.mysql.com/)
+- [Midtrans](https://midtrans.com/)
 
 ## Installation
 

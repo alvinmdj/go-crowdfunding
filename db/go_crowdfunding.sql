@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2022 at 04:23 PM
+-- Generation Time: Jun 01, 2022 at 09:51 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -47,7 +47,7 @@ CREATE TABLE `campaigns` (
 --
 
 INSERT INTO `campaigns` (`id`, `user_id`, `name`, `short_description`, `description`, `perks`, `backer_count`, `goal_amount`, `current_amount`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 1, 'test CaMpaIgn POSTMAN different SLuG', 'campaign test from postman', 'long description', 'perks 1, perks 2, perks 3', 0, 10000000, 0, 'test-campaign-postman-different-slug-1', '2022-05-14 12:55:20', '2022-05-14 12:55:20'),
+(1, 1, 'test CaMpaIgn POSTMAN different SLuG', 'campaign test from postman', 'long description', 'perks 1, perks 2, perks 3', 1, 10000000, 321000, 'test-campaign-postman-different-slug-1', '2022-05-14 12:55:20', '2022-06-01 14:24:58'),
 (2, 1, 'test CaMpaIgn POSTMAN', 'campaign test from postman Updated', 'long description Updated', 'perks 1, perks 2, perks 3, perks 4, perks 5', 0, 999000000, 0, 'campaign-two', '2022-05-10 15:53:42', '2022-05-14 15:57:16'),
 (3, 2, 'Campaign 3', 'testt', 'testsadsadasd', 'perk1, 213, 213123', 0, 20100000, 0, 'campaign-three', '2022-05-10 15:55:35', '2022-05-10 15:55:35'),
 (4, 1, 'Crowdfunding for start up', 'Startup is a new company', 'Startup is a new company and we need to raise money for it', 'reward 1, reward 2, reward 3', 0, 100000000, 0, 'crowdfunding-for-start-up-1', '2022-05-14 12:21:59', '2022-05-14 12:21:59'),
@@ -103,7 +103,12 @@ INSERT INTO `transactions` (`id`, `campaign_id`, `user_id`, `amount`, `status`, 
 (2, 1, 2, 350000, 'pending', NULL, '', '2022-05-15 16:42:09', '2022-05-15 16:42:09'),
 (3, 1, 1, 500000, 'pending', NULL, '', '2022-05-15 16:58:44', '2022-05-15 16:58:44'),
 (4, 5, 1, 1500000, 'pending', 'TRX-511653142571370', '', '2022-05-21 21:16:11', '2022-05-21 21:16:11'),
-(5, 2, 1, 10000000, 'pending', 'TRX-211653143563270', '', '2022-05-21 21:32:43', '2022-05-21 21:32:43');
+(5, 2, 1, 10000000, 'pending', 'TRX-211653143563270', '', '2022-05-21 21:32:43', '2022-05-21 21:32:43'),
+(6, 1, 1, 10000000, 'pending', 'TRX-111653316271420', 'https://app.sandbox.midtrans.com/snap/v2/vtweb/77994275-22d2-4b89-a685-bd3a880f594e', '2022-05-23 21:31:11', '2022-05-23 21:31:13'),
+(7, 1, 1, 250000, 'pending', 'TRX-111653316750645', 'https://app.sandbox.midtrans.com/snap/v2/vtweb/5fa3760a-8e0e-4c07-b5f8-10a0d8360557', '2022-05-23 21:39:10', '2022-05-23 21:39:13'),
+(8, 1, 1, 5000000, 'pending', 'TRX-111653987017219', 'https://app.sandbox.midtrans.com/snap/v2/vtweb/04ce7e52-604d-40e7-9335-d81ede0465b2', '2022-05-31 15:50:17', '2022-05-31 15:50:21'),
+(9, 1, 1, 123000, 'pending', 'TRX-111654067700982', 'https://app.sandbox.midtrans.com/snap/v2/vtweb/8511559b-de3e-43d7-880f-606df348093c', '2022-06-01 14:15:00', '2022-06-01 14:15:03'),
+(10, 1, 1, 321000, 'paid', 'TRX-111654068242751', 'https://app.sandbox.midtrans.com/snap/v2/vtweb/ae28624c-ea70-406e-88b1-0a6acc080c45', '2022-06-01 14:24:02', '2022-06-01 14:24:58');
 
 -- --------------------------------------------------------
 
@@ -180,7 +185,7 @@ ALTER TABLE `campaign_images`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
