@@ -4,6 +4,10 @@ Back-end with Go Gin web framework.
 
 API: [API Documentation (Postman)](https://documenter.getpostman.com/view/16534190/Uz5DrdeP)
 
+Deployed on Heroku: [Go Crowdfunding](https://go-crowdfunding.herokuapp.com/)
+
+**Note**: deployed for demo purpose only. Do not post confidential information.
+
 ## Links
 
 - [Go](https://go.dev/)
