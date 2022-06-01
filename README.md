@@ -117,4 +117,7 @@ ngrok http <port>
 
 # example
 ngrok http 8080
+
+# setup in Midtrans Configuration - Payment Notification URL:
+# <ngrok-url>/api/v1/transactions/notification
 ```
