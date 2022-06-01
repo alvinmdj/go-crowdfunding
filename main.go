@@ -14,6 +14,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 	"gorm.io/driver/mysql"
@@ -58,6 +59,9 @@ func main() {
 
 	// setup router
 	router := gin.Default()
+
+	// setup cors middleware
+	router.Use(cors.Default())
 
 	// setup static file routes
 	router.Static("/avatars", "./public/images/avatars")

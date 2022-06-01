@@ -17,6 +17,7 @@
 - [Midtrans Docs Snap API](https://snap-docs.midtrans.com/)
 - [Midtrans Docs Handle After Payment HTTP(S) Notification](https://docs.midtrans.com/en/after-payment/http-notification)
 - [ngrok](https://ngrok.com/)
+- [Gin - CORS](https://github.com/gin-contrib/cors)
 
 ## Requirements
 
@@ -100,6 +101,12 @@ go get -u github.com/gosimple/slug
 
 ```go
 go get -u github.com/veritrans/go-midtrans
+```
+
+- [Gin CORS](https://github.com/gin-contrib/cors)
+
+```go
+go get github.com/gin-contrib/cors
 ```
 
 ## ngrok Commands
