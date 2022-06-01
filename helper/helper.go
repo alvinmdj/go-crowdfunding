@@ -2,6 +2,7 @@ package helper
 
 import (
 	"log"
+	"os"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/joho/godotenv"
@@ -44,8 +45,10 @@ func FormatValidationError(err error) []string {
 }
 
 func LoadEnv() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	if os.Getenv("APP_ENV") != "production" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
 	}
 }
