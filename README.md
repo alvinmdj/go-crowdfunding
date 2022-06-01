@@ -6,7 +6,9 @@ API: [API Documentation (Postman)](https://documenter.getpostman.com/view/165341
 
 Deployed on Heroku: [Go Crowdfunding](https://go-crowdfunding.herokuapp.com/)
 
-**Note**: deployed for demo purpose only. Do not post confidential information.
+**Note 1**: deployed for demo purpose only. Do not post confidential information.
+
+**Note 2**: uploaded file (image, etc.) won't be stored permanently because of [Heroku ephemeral file system](https://devcenter.heroku.com/articles/active-storage-on-heroku).
 
 ## Links
 
