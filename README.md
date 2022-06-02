@@ -153,4 +153,6 @@ DB_PASSWORD=
 JWT_SECRET=
 MIDTRANS_CLIENT_KEY=
 MIDTRANS_SERVER_KEY=
+
+# Also use 'heroku/go' buildpack (from heroku project dashboard > settings > buildpacks > add buildpack > choose go)
 ```
