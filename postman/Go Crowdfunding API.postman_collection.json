@@ -24,15 +24,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/users",
-							"protocol": "http",
+							"raw": "{{url}}/users",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"users"
 							]
 						}
@@ -54,15 +50,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/users",
-							"protocol": "http",
+							"raw": "{{url}}/users",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"users"
 							]
 						}
@@ -84,15 +76,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/sessions",
-							"protocol": "http",
+							"raw": "{{url}}/sessions",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"sessions"
 							]
 						}
@@ -114,15 +102,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/sessions",
-							"protocol": "http",
+							"raw": "{{url}}/sessions",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"sessions"
 							]
 						}
@@ -144,15 +128,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/sessions",
-							"protocol": "http",
+							"raw": "{{url}}/sessions",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"sessions"
 							]
 						}
@@ -174,15 +154,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/sessions",
-							"protocol": "http",
+							"raw": "{{url}}/sessions",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"sessions"
 							]
 						}
@@ -204,15 +180,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/email_checkers",
-							"protocol": "http",
+							"raw": "{{url}}/email_checkers",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"email_checkers"
 							]
 						}
@@ -234,15 +206,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/email_checkers",
-							"protocol": "http",
+							"raw": "{{url}}/email_checkers",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"email_checkers"
 							]
 						}
@@ -275,15 +243,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/avatars",
-							"protocol": "http",
+							"raw": "{{url}}/avatars",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"avatars"
 							]
 						}
@@ -316,15 +280,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/avatars",
-							"protocol": "http",
+							"raw": "{{url}}/avatars",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"avatars"
 							]
 						}
@@ -347,15 +307,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/users/fetch",
-							"protocol": "http",
+							"raw": "{{url}}/users/fetch",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"users",
 								"fetch"
 							]
@@ -374,15 +330,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns"
 							]
 						}
@@ -395,15 +347,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns?user_id=1",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns?user_id=1",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns"
 							],
 							"query": [
@@ -422,15 +370,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns?user_id=121931923123",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns?user_id=121931923123",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns"
 							],
 							"query": [
@@ -449,15 +393,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns/2",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns/2",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns",
 								"2"
 							]
@@ -471,15 +411,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns/1213213",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns/1213213",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns",
 								"1213213"
 							]
@@ -512,15 +448,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns"
 							]
 						}
@@ -552,15 +484,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns"
 							]
 						}
@@ -592,15 +520,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns"
 							]
 						}
@@ -632,15 +556,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns/2",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns/2",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns",
 								"2"
 							]
@@ -673,15 +593,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns/3",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns/3",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns",
 								"3"
 							]
@@ -725,15 +641,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaign-images",
-							"protocol": "http",
+							"raw": "{{url}}/campaign-images",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaign-images"
 							]
 						}
@@ -776,15 +688,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaign-images",
-							"protocol": "http",
+							"raw": "{{url}}/campaign-images",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaign-images"
 							]
 						}
@@ -817,15 +725,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaign-images",
-							"protocol": "http",
+							"raw": "{{url}}/campaign-images",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaign-images"
 							]
 						}
@@ -869,15 +773,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaign-images",
-							"protocol": "http",
+							"raw": "{{url}}/campaign-images",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaign-images"
 							]
 						}
@@ -905,15 +805,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/campaigns/1/transactions",
-							"protocol": "http",
+							"raw": "{{url}}/campaigns/1/transactions",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"campaigns",
 								"1",
 								"transactions"
@@ -938,14 +834,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/transactions",
-							"protocol": "http",
+							"raw": "{{url}}/v1/transactions",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"v1",
 								"transactions"
 							]
@@ -978,57 +871,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/transactions",
-							"protocol": "http",
+							"raw": "{{url}}/transactions",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"transactions"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Transaction - ngrok",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"campaign_id\": 1,\r\n    \"amount\": 321000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://d8f6-2001-448a-2040-ee44-1cd1-2c2c-ad59-f80.ap.ngrok.io/api/v1/transactions",
-							"protocol": "https",
-							"host": [
-								"d8f6-2001-448a-2040-ee44-1cd1-2c2c-ad59-f80",
-								"ap",
-								"ngrok",
-								"io"
+								"{{url}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"transactions"
 							]
 						}
@@ -1060,15 +907,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/transactions",
-							"protocol": "http",
+							"raw": "{{url}}/transactions",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
-								"v1",
 								"transactions"
 							]
 						}
@@ -1083,12 +926,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/avatars/1-1652368121492-profile2.png",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/avatars/1-1652368121492-profile2.png",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"avatars",
 						"1-1652368121492-profile2.png"
@@ -1103,12 +944,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/campaign-images/1-1652542455367-profile.png",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/campaign-images/1-1652542455367-profile.png",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"campaign-images",
 						"1-1652542455367-profile.png"
@@ -1142,6 +981,21 @@
 		{
 			"key": "token",
 			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.8-rW-F4iJAmpKnLKct2w_gngP3BFa3P1Ai-GkvA_HNw",
+			"type": "string"
+		},
+		{
+			"key": "urlLocal",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "url",
+			"value": "https://go-crowdfunding.herokuapp.com/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://go-crowdfunding.herokuapp.com",
 			"type": "string"
 		}
 	]
