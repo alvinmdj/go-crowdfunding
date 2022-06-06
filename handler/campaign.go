@@ -24,8 +24,9 @@ func NewCampaignHandler(campaignService campaign.Service) *campaignHandler {
 // Handler to get all campaigns
 func (h *campaignHandler) GetCampaigns(c *gin.Context) {
 	userId, _ := strconv.Atoi(c.Query("user_id"))
+	limit, _ := strconv.Atoi(c.Query("limit"))
 
-	campaigns, err := h.campaignService.GetCampaigns(userId)
+	campaigns, err := h.campaignService.GetCampaigns(userId, limit)
 	if err != nil {
 		response := helper.APIResponse(
 			"Error trying to get campaigns data", http.StatusBadRequest, "error", nil,

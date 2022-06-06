@@ -8,7 +8,7 @@ import (
 )
 
 type Service interface {
-	GetCampaigns(userId int) ([]Campaign, error)
+	GetCampaigns(userId int, limit int) ([]Campaign, error)
 	GetCampaignByID(input GetCampaignDetailsInput) (Campaign, error)
 	CreateCampaign(input CreateCampaignInput) (Campaign, error)
 	UpdateCampaign(inputId GetCampaignDetailsInput, inputData CreateCampaignInput) (Campaign, error)
@@ -26,13 +26,22 @@ func NewService(repository Repository) *service {
 
 // Service to get all campaigns
 // If User ID is set, only return campaigns that belong to that user
-func (s *service) GetCampaigns(userId int) ([]Campaign, error) {
-	if userId == 0 { // no userId, return all campaigns
-		campaigns, err := s.repository.FindAll()
-		if err != nil {
-			return campaigns, err
+// If limit is set, only return that number of campaigns
+func (s *service) GetCampaigns(userId int, limit int) ([]Campaign, error) {
+	if userId == 0 { // no userId, check if limit is set
+		if limit == 0 { // no limit, return all campaigns
+			campaigns, err := s.repository.FindAll()
+			if err != nil {
+				return campaigns, err
+			}
+			return campaigns, nil
+		} else { // limit is set, return that number of campaigns
+			campaigns, err := s.repository.FindWithLimit(limit)
+			if err != nil {
+				return campaigns, err
+			}
+			return campaigns, nil
 		}
-		return campaigns, nil
 	}
 
 	campaigns, err := s.repository.FindByUserID(userId)
