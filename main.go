@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -61,7 +62,14 @@ func main() {
 	router := gin.Default()
 
 	// setup cors middleware
-	router.Use(cors.Default())
+	router.Use(cors.New(cors.Config{
+    AllowOrigins:     []string{"*"},
+    AllowMethods:     []string{"GET", "POST", "PUT", "PATCH"},
+    AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+    ExposeHeaders:    []string{"Content-Length"},
+    AllowCredentials: true,
+    MaxAge: 12 * time.Hour,
+  }))
 
 	// setup static file routes
 	router.Static("/avatars", "./public/images/avatars")
