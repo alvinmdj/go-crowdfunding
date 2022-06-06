@@ -155,4 +155,6 @@ MIDTRANS_CLIENT_KEY=
 MIDTRANS_SERVER_KEY=
 
 # Also use 'heroku/go' buildpack (from heroku project dashboard > settings > buildpacks > add buildpack > choose go)
+
+# Push changes to Heroku with: git push heroku main
 ```
