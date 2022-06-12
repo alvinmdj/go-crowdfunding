@@ -9,13 +9,16 @@ import (
 	"go-crowdfunding/payment"
 	"go-crowdfunding/transaction"
 	"go-crowdfunding/user"
+	webHandler "go-crowdfunding/web/handler"
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/multitemplate"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 	"gorm.io/driver/mysql"
@@ -58,6 +61,9 @@ func main() {
 	transactionService := transaction.NewService(transactionRepository, campaignRepository, paymentService)
 	transactionHandler := handler.NewTransactionHandler(transactionService)
 
+	// setup user web
+	userWebHandler := webHandler.NewUserHandler()
+
 	// setup router
 	router := gin.Default()
 
@@ -71,9 +77,18 @@ func main() {
     MaxAge: 12 * time.Hour,
   }))
 
+	// setup templates from /web/templates folder
+	router.HTMLRender = loadTemplates("./web/templates")
+
 	// setup static file routes
 	router.Static("/avatars", "./public/images/avatars")
 	router.Static("/campaign-images", "./public/images/campaign-images")
+	router.Static("/css", "./web/assets/css")
+	router.Static("/js", "./web/assets/js")
+	router.Static("/webfonts", "./web/assets/webfonts")
+
+	// user web routes
+	router.GET("/users", userWebHandler.Index)
 
 	// setup api routes
 	api := router.Group("/api/v1")
@@ -157,4 +172,30 @@ func authMiddleware(authService auth.Service, userService user.Service) gin.Hand
 		// set the current user to the context
 		c.Set("currentUser", user)
 	}
+}
+
+// loadTemplates is a function to load HTML templates
+func loadTemplates(templatesDir string) multitemplate.Renderer {
+  r := multitemplate.NewRenderer()
+
+	// load all file from /layouts directory
+  layouts, err := filepath.Glob(templatesDir + "/layouts/*")
+  if err != nil {
+    panic(err.Error())
+  }
+
+	// load all folders from /templates directory
+  includes, err := filepath.Glob(templatesDir + "/**/*")
+  if err != nil {
+    panic(err.Error())
+  }
+
+  // Generate our templates map from our layouts/ and includes/ directories
+  for _, include := range includes {
+    layoutCopy := make([]string, len(layouts))
+    copy(layoutCopy, layouts)
+    files := append(layoutCopy, include)
+    r.AddFromFiles(filepath.Base(include), files...)
+  }
+  return r
 }

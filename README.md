@@ -28,6 +28,9 @@ Deployed on Heroku: [Go Crowdfunding](https://go-crowdfunding.herokuapp.com/)
 - [Midtrans Docs Handle After Payment HTTP(S) Notification](https://docs.midtrans.com/en/after-payment/http-notification)
 - [ngrok](https://ngrok.com/)
 - [Gin - CORS](https://github.com/gin-contrib/cors)
+- [Gin - Multitemplate](https://github.com/gin-contrib/multitemplate)
+- [Bootadmin Template (Archived)](https://web.archive.org/web/20201129084141/https://github.com/kjdion84/bootadmin)
+- [Bootadmin Docs (Archived)](https://web.archive.org/web/20210301183117/https://bootadmin.net/demo/docs)
 
 ## Requirements
 
@@ -118,6 +121,12 @@ go get -u github.com/veritrans/go-midtrans
 
 ```go
 go get github.com/gin-contrib/cors
+```
+
+- [Gin - Multitemplate](https://github.com/gin-contrib/multitemplate)
+
+```go
+go get github.com/gin-contrib/multitemplate
 ```
 
 ## ngrok Commands
