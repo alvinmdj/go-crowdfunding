@@ -18,3 +18,13 @@ type LoginInput struct {
 type CheckEmailInput struct {
 	Email string `json:"email" binding:"required,email"`
 }
+
+// FormRegisterUserInput is the input required for registering a user
+// Here, we use form, not json
+type FormRegisterUserInput struct {
+	Name       string `form:"name" binding:"required"`
+	Occupation string `form:"occupation" binding:"required"`
+	Email      string `form:"email" binding:"required,email"`
+	Password   string `form:"password" binding:"required,gte=8"`
+	Error      error
+}

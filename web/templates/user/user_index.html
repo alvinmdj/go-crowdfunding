@@ -1,6 +1,10 @@
 {{ define "content" }}
 <h2 class="mb-4">List of User</h2>
 
+<a href="/users/create" class="btn btn-primary mb-3">
+  <i class="fa fa-plus"></i> Add User
+</a>
+
 <div class="card mb-4">
   <div class="card-body">
     <table class="table mb-0">
@@ -17,7 +21,9 @@
         {{ range .users }}
           <tr>
             <td class="img-fluid img-thumbnail">
-              <img src="{{ .AvatarFileName }}" alt="{{ .Name }}" width="60" />
+              {{ if .AvatarFileName }}
+                <img src="{{ .AvatarFileName }}" alt="{{ .Name }}" width="60" />
+              {{ end }}
             </td>
             <td>{{ .Name }}</td>
             <td>{{ .Email }}</td>

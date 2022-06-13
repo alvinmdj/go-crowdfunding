@@ -89,6 +89,8 @@ func main() {
 
 	// user web routes
 	router.GET("/users", userWebHandler.Index)
+	router.GET("/users/create", userWebHandler.Create)
+	router.POST("/users", userWebHandler.Store)
 
 	// setup api routes
 	api := router.Group("/api/v1")
