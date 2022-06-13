@@ -14,21 +14,25 @@
           <th>Name</th>
           <th>Email</th>
           <th>Occupation</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <!-- Loop through users data -->
         {{ range .users }}
-          <tr>
-            <td class="img-fluid img-thumbnail">
-              {{ if .AvatarFileName }}
-                <img src="{{ .AvatarFileName }}" alt="{{ .Name }}" width="60" />
-              {{ end }}
-            </td>
-            <td>{{ .Name }}</td>
-            <td>{{ .Email }}</td>
-            <td>{{ .Occupation }}</td>
-          </tr>
+        <tr>
+          <td class="img-fluid img-thumbnail">
+            {{ if .AvatarFileName }}
+            <img src="{{ .AvatarFileName }}" alt="{{ .Name }}" width="60" />
+            {{ end }}
+          </td>
+          <td>{{ .Name }}</td>
+          <td>{{ .Email }}</td>
+          <td>{{ .Occupation }}</td>
+          <td>
+            <a href="/users/edit/{{ .ID }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+          </td>
+        </tr>
         {{ end }}
       </tbody>
     </table>

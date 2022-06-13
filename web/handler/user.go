@@ -3,6 +3,7 @@ package handler
 import (
 	"go-crowdfunding/user"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -52,6 +53,69 @@ func (h *userHandler) Store(c *gin.Context) {
 
 	// call service to register a new user with RegisterUserInput
 	_, err = h.userService.RegisterUser(registerInput)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	c.Redirect(http.StatusFound, "/users")
+}
+
+// Handler to show edit user page
+func (h *userHandler) Edit(c *gin.Context) {
+	// get id from url
+	idFromParam := c.Param("id")
+
+	// convert idFromParam (which is a string) to int
+	userId, err := strconv.Atoi(idFromParam)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// call service to get user by id
+	registeredUser, err := h.userService.GetUserById(userId)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// map registeredUser to FormUpdateUserInput
+	formUpdateUserInput := user.FormUpdateUserInput{}
+	formUpdateUserInput.ID = registeredUser.ID
+	formUpdateUserInput.Name = registeredUser.Name
+	formUpdateUserInput.Occupation = registeredUser.Occupation
+	formUpdateUserInput.Email = registeredUser.Email
+
+	c.HTML(http.StatusOK, "user_edit.html", formUpdateUserInput)
+}
+
+// Handler to update the user
+func (h *userHandler) Update(c *gin.Context) {
+	idFromParam := c.Param("id")
+
+	// convert idFromParam (which is a string) to int
+	userId, err := strconv.Atoi(idFromParam)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// Get input from form & validate it
+	var input user.FormUpdateUserInput
+	err = c.ShouldBind(&input)
+	if err != nil {
+		input.ID = userId
+		input.Error = err
+		c.HTML(http.StatusOK, "user_edit.html", input)
+		return
+	}
+
+	// bind user id to input
+	input.ID = userId
+
+	// call service to update user
+	_, err = h.userService.UpdateUser(input)
 	if err != nil {
 		c.HTML(http.StatusInternalServerError, "error.html", nil)
 		return

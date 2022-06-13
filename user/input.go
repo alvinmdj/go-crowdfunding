@@ -28,3 +28,12 @@ type FormRegisterUserInput struct {
 	Password   string `form:"password" binding:"required,gte=8"`
 	Error      error
 }
+
+// FormUpdateUserInput is the input required for updating a user
+type FormUpdateUserInput struct {
+	ID         int
+	Name       string `form:"name" binding:"required"`
+	Occupation string `form:"occupation" binding:"required"`
+	Email      string `form:"email" binding:"required,email"`
+	Error      error
+}
