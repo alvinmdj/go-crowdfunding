@@ -61,8 +61,8 @@ func main() {
 	transactionService := transaction.NewService(transactionRepository, campaignRepository, paymentService)
 	transactionHandler := handler.NewTransactionHandler(transactionService)
 
-	// setup user web
-	userWebHandler := webHandler.NewUserHandler()
+	// setup user handler for web
+	userWebHandler := webHandler.NewUserHandler(userService)
 
 	// setup router
 	router := gin.Default()
