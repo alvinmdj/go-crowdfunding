@@ -6,6 +6,7 @@
     <table class="table mb-0">
       <thead class="thead-light">
         <tr>
+          <th>Avatar</th>
           <th>Name</th>
           <th>Email</th>
           <th>Occupation</th>
@@ -15,6 +16,9 @@
         <!-- Loop through users data -->
         {{ range .users }}
           <tr>
+            <td class="img-fluid img-thumbnail">
+              <img src="{{ .AvatarFileName }}" alt="{{ .Name }}" width="60" />
+            </td>
             <td>{{ .Name }}</td>
             <td>{{ .Email }}</td>
             <td>{{ .Occupation }}</td>
