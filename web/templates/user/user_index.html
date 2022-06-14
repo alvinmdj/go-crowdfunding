@@ -23,7 +23,7 @@
         <tr>
           <td class="img-fluid img-thumbnail">
             {{ if .AvatarFileName }}
-            <img src="{{ .AvatarFileName }}" alt="{{ .Name }}" width="60" />
+            <img src="/{{ .AvatarFileName }}" alt="{{ .Name }}" width="60" />
             {{ end }}
           </td>
           <td>{{ .Name }}</td>
