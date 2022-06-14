@@ -93,6 +93,8 @@ func main() {
 	router.POST("/users", userWebHandler.Store)
 	router.GET("/users/edit/:id", userWebHandler.Edit)
 	router.POST("/users/update/:id", userWebHandler.Update)
+	router.GET("/users/avatar/:id", userWebHandler.NewAvatar)
+	router.POST("/users/avatar/:id", userWebHandler.StoreAvatar)
 
 	// setup api routes
 	api := router.Group("/api/v1")
