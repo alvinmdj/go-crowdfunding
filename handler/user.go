@@ -171,8 +171,11 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 	currentUser := c.MustGet("currentUser").(user.User)
 	userId := currentUser.ID
 
+	// generate unique number from current time in milli
+	uniqueNumber := time.Now().UnixMilli()
+
 	// save image in folder 'public/images/avatars/'
-	rootPath := fmt.Sprintf("public/images/avatars/%d-%d-%s", userId, time.Now().UnixMilli(), file.Filename)
+	rootPath := fmt.Sprintf("public/images/avatars/%d-%d-%s", userId, uniqueNumber, file.Filename)
 	err = c.SaveUploadedFile(file, rootPath)
 	if err != nil {
 		data := gin.H{"is_uploaded": false}
@@ -184,7 +187,7 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 	}
 
 	// update user avatar in database (path: avatars/filename.extension)
-	relativePath := fmt.Sprintf("avatars/%d-%d-%s", userId, time.Now().UnixMilli(), file.Filename)
+	relativePath := fmt.Sprintf("avatars/%d-%d-%s", userId, uniqueNumber, file.Filename)
 	_, err = h.userService.SaveAvatar(userId, relativePath)
 	if err != nil {
 		data := gin.H{"is_uploaded": false}
