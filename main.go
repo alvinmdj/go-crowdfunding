@@ -63,7 +63,7 @@ func main() {
 
 	// setup web handler
 	userWebHandler := webHandler.NewUserHandler(userService)
-	campaignWebHandler := webHandler.NewCampaignHandler(campaignService)
+	campaignWebHandler := webHandler.NewCampaignHandler(campaignService, userService)
 
 	// setup router
 	router := gin.Default()
@@ -99,6 +99,7 @@ func main() {
 
 	// campaign web routes
 	router.GET("/campaigns", campaignWebHandler.Index)
+	router.GET("/campaigns/create", campaignWebHandler.Create)
 
 	// setup api routes
 	api := router.Group("/api/v1")
