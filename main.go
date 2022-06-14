@@ -61,8 +61,9 @@ func main() {
 	transactionService := transaction.NewService(transactionRepository, campaignRepository, paymentService)
 	transactionHandler := handler.NewTransactionHandler(transactionService)
 
-	// setup user handler for web
+	// setup web handler
 	userWebHandler := webHandler.NewUserHandler(userService)
+	campaignWebHandler := webHandler.NewCampaignHandler(campaignService)
 
 	// setup router
 	router := gin.Default()
@@ -95,6 +96,9 @@ func main() {
 	router.POST("/users/update/:id", userWebHandler.Update)
 	router.GET("/users/avatar/:id", userWebHandler.NewAvatar)
 	router.POST("/users/avatar/:id", userWebHandler.StoreAvatar)
+
+	// campaign web routes
+	router.GET("/campaigns", campaignWebHandler.Index)
 
 	// setup api routes
 	api := router.Group("/api/v1")
