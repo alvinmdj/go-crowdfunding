@@ -3,7 +3,10 @@
 
 {{ if .Error }}
 <div class="alert alert-danger">
-  {{ .Error }}
+  {{ range .Error }}
+    {{ .Error }}
+    <br />
+  {{ end }}
 </div>
 {{ end }}
 
@@ -15,12 +18,12 @@
         <select name="user_id" class="form-control" required>
           <option value="" selected disabled>-- Select a User --</option>
           {{ range .Users }}
-          <!-- Check if user.ID from range equals with UserID from handler -->
-          {{ if eq .ID $.UserID }}
-          <option value="{{ .ID }}" selected>{{ .Name }}</option>
-          {{ else }}
-          <option value="{{ .ID }}">{{ .Name }}</option>
-          {{ end }}
+            <!-- Check if user.ID from range equals with UserID from handler -->
+            {{ if eq .ID $.UserID }}
+            <option value="{{ .ID }}" selected>{{ .Name }}</option>
+            {{ else }}
+            <option value="{{ .ID }}">{{ .Name }}</option>
+            {{ end }}
           {{ end }}
         </select>
       </div>
