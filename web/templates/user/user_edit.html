@@ -3,7 +3,10 @@
 
 {{ if .Error }}
 <div class="alert alert-danger">
-  {{ .Error }}
+  {{ range .Error }}
+    {{ .Error }}
+    <br />
+  {{ end }}
 </div>
 {{ end }}
 
