@@ -168,3 +168,87 @@ func (h *campaignHandler) StoreImage(c *gin.Context) {
 
 	c.Redirect(http.StatusFound, "/campaigns")
 }
+
+// Handler to show edit campaign form
+func (h *campaignHandler) Edit(c *gin.Context) {
+	// get campaign id from uri
+	idFromParam := c.Param("id")
+
+	// convert id to int
+	id, err := strconv.Atoi(idFromParam)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// get campaign by id
+	existingCampaign, err := h.campaignService.GetCampaignByID(campaign.GetCampaignDetailsInput{ID: id})
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// map campaign data to FormUpdateCampaignInput
+	input := campaign.FormUpdateCampaignInput{}
+	input.ID = id
+	input.Name = existingCampaign.Name
+	input.ShortDescription = existingCampaign.ShortDescription
+	input.Description = existingCampaign.Description
+	input.GoalAmount = existingCampaign.GoalAmount
+	input.Perks = existingCampaign.Perks
+
+	c.HTML(http.StatusOK, "campaign_edit.html", input)
+}
+
+// Handler to update campaign
+func (h *campaignHandler) Update(c *gin.Context) {
+	idFromParam := c.Param("id")
+
+	id, err := strconv.Atoi(idFromParam)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// bind & validate input
+	var input campaign.FormUpdateCampaignInput
+	err = c.ShouldBind(&input)
+	if err != nil {
+		input.Error = err
+		input.ID = id
+		c.HTML(http.StatusOK, "campaign_edit.html", input)
+		return
+	}
+
+	// get campaign by id
+	existingCampaign, err := h.campaignService.GetCampaignByID(campaign.GetCampaignDetailsInput{ID: id})
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+	userId := existingCampaign.UserID
+
+	// get user by id to map to CreateCampaignInput
+	userCampaign, err := h.userService.GetUserById(userId)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// map form input to UpdateCampaignInput
+	updateInput := campaign.CreateCampaignInput{}
+	updateInput.Name = input.Name
+	updateInput.ShortDescription = input.ShortDescription
+	updateInput.Description = input.Description
+	updateInput.GoalAmount = input.GoalAmount
+	updateInput.Perks = input.Perks
+	updateInput.User = userCampaign
+
+	_, err = h.campaignService.UpdateCampaign(campaign.GetCampaignDetailsInput{ID: id}, updateInput)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	c.Redirect(http.StatusFound, "/campaigns")
+}

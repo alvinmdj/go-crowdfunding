@@ -39,3 +39,15 @@ type FormCreateCampaignInput struct {
 	Users            []user.User
 	Error            error
 }
+
+// FormUpdateCampaignInput is the input required for updating a campaign
+type FormUpdateCampaignInput struct {
+	ID               int
+	Name             string `form:"name" binding:"required"`
+	ShortDescription string `form:"short_description" binding:"required"`
+	Description      string `form:"description" binding:"required"`
+	GoalAmount       int    `form:"goal_amount" binding:"required"`
+	Perks            string `form:"perks" binding:"required"`
+	Error            error
+	User             user.User
+}
