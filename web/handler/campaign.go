@@ -1,9 +1,12 @@
 package handler
 
 import (
+	"fmt"
 	"go-crowdfunding/campaign"
 	"go-crowdfunding/user"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -84,6 +87,80 @@ func (h *campaignHandler) Store(c *gin.Context) {
 
 	// call service to create campaign
 	_, err = h.campaignService.CreateCampaign(createCampaignInput)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	c.Redirect(http.StatusFound, "/campaigns")
+}
+
+// Handler to show create campaign image form
+func (h *campaignHandler) NewImage(c *gin.Context) {
+	// get campaign id from uri
+	idFromParam := c.Param("id")
+
+	id, err := strconv.Atoi(idFromParam)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	c.HTML(http.StatusOK, "campaign_upload.html", gin.H{"ID": id})
+}
+
+// Handler to create campaign image
+func (h *campaignHandler) StoreImage(c *gin.Context) {
+	// get file from form data
+	file, err := c.FormFile("file")
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// get campaign id from uri
+	idFromParam := c.Param("id")
+	campaignId, err := strconv.Atoi(idFromParam)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// get user id from current campaign
+	existingCampaign, err := h.campaignService.GetCampaignByID(campaign.GetCampaignDetailsInput{ID: campaignId})
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+	userId := existingCampaign.UserID
+
+	// generate unique number from current time in milli
+	uniqueNumber := time.Now().UnixMilli()
+
+	// save campaign image in folder 'public/images/campaign-images/'
+	rootPath := fmt.Sprintf("public/images/campaign-images/%d-%d-%s", userId, uniqueNumber, file.Filename)
+	err = c.SaveUploadedFile(file, rootPath)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// get user by id to map to CreateCampaignInput
+	userCampaign, err := h.userService.GetUserById(userId)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// map required input to CreateCampaignImageInput
+	createCampaignImageInput := campaign.CreateCampaignImageInput{}
+	createCampaignImageInput.CampaignID = campaignId
+	createCampaignImageInput.IsPrimary = true
+	createCampaignImageInput.User = userCampaign
+
+	// save campaign image in database (path: campaign-images/filename.extension)
+	relativePath := fmt.Sprintf("campaign-images/%d-%d-%s", userId, uniqueNumber, file.Filename)
+	_, err = h.campaignService.CreateCampaignImage(createCampaignImageInput, relativePath)
 	if err != nil {
 		c.HTML(http.StatusInternalServerError, "error.html", nil)
 		return

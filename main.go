@@ -101,6 +101,8 @@ func main() {
 	router.GET("/campaigns", campaignWebHandler.Index)
 	router.GET("/campaigns/create", campaignWebHandler.Create)
 	router.POST("/campaigns", campaignWebHandler.Store)
+	router.GET("/campaigns/image/:id", campaignWebHandler.NewImage)
+	router.POST("/campaigns/image/:id", campaignWebHandler.StoreImage)
 
 	// setup api routes
 	api := router.Group("/api/v1")
