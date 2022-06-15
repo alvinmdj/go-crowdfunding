@@ -192,8 +192,11 @@ func (h *campaignHandler) UploadCampaignImage(c *gin.Context) {
 		return
 	}
 
+	// generate unique number from current time in milli
+	uniqueNumber := time.Now().UnixMilli()
+
 	// save campaign image in folder 'public/images/campaign-images/'
-	rootPath := fmt.Sprintf("public/images/campaign-images/%d-%d-%s", userId, time.Now().UnixMilli(), file.Filename)
+	rootPath := fmt.Sprintf("public/images/campaign-images/%d-%d-%s", userId, uniqueNumber, file.Filename)
 	err = c.SaveUploadedFile(file, rootPath)
 	if err != nil {
 		data := gin.H{"is_uploaded": false}
@@ -205,7 +208,7 @@ func (h *campaignHandler) UploadCampaignImage(c *gin.Context) {
 	}
 
 	// save campaign image in database (path: campaign-images/filename.extension)
-	relativePath := fmt.Sprintf("campaign-images/%d-%d-%s", userId, time.Now().UnixMilli(), file.Filename)
+	relativePath := fmt.Sprintf("campaign-images/%d-%d-%s", userId, uniqueNumber, file.Filename)
 	_, err = h.campaignService.CreateCampaignImage(input, relativePath)
 	if err != nil {
 		data := gin.H{"is_uploaded": false}
