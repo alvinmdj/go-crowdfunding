@@ -1,6 +1,13 @@
 # Go Crowdfunding
 
-Back-end with Go Gin web framework.
+Back-end with Go Gin web framework, consists of admin pages and API for front-end needs.
+
+Admin can performs:
+
+- Login & logout (session based).
+- View users, campaigns, and transactions.
+- Create & edit users data & campaign data.
+- Upload user & campaign image.
 
 API: [API Documentation (Postman)](https://documenter.getpostman.com/view/16534190/Uz5DrdeP)
 
