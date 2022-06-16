@@ -8,6 +8,7 @@ type Repository interface {
 	FindByCode(transactionCode string) (Transaction, error)
 	Create(transaction Transaction) (Transaction, error)
 	Update(transaction Transaction) (Transaction, error)
+	FindAll() ([]Transaction, error)
 }
 
 type repository struct {
@@ -86,4 +87,16 @@ func (r *repository) Update(transaction Transaction) (Transaction, error) {
 	}
 
 	return transaction, nil
+}
+
+// Repository to get all transactions
+func (r *repository) FindAll() ([]Transaction, error) {
+	var transactions []Transaction
+
+	err := r.db.Preload("Campaign").Preload("User").Order("id desc").Find(&transactions).Error
+	if err != nil {
+		return transactions, err
+	}
+
+	return transactions, nil
 }
