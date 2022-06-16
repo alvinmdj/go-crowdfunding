@@ -238,7 +238,7 @@
 								{
 									"key": "avatar",
 									"type": "file",
-									"src": "/C:/Users/Asus/Pictures/Saved Pictures/profile2.png"
+									"src": "/C:/Users/Asus/Pictures/Saved Pictures/dio.png"
 								}
 							]
 						},
@@ -342,6 +342,29 @@
 					"response": []
 				},
 				{
+					"name": "Get Campaigns with Limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/campaigns?limit=3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"campaigns"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Campaigns with User ID",
 					"request": {
 						"method": "GET",
@@ -388,7 +411,7 @@
 					"response": []
 				},
 				{
-					"name": "Get All Campaigns with ID",
+					"name": "Get Campaign Detail by ID",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -406,7 +429,7 @@
 					"response": []
 				},
 				{
-					"name": "Get All Campaigns with Invalid ID",
+					"name": "Get Campaign Detail with Invalid ID",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -625,7 +648,7 @@
 							"formdata": [
 								{
 									"key": "campaign_id",
-									"value": "2",
+									"value": "1",
 									"type": "text"
 								},
 								{
@@ -636,7 +659,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/Asus/Pictures/Saved Pictures/profile.png"
+									"src": "/C:/Users/Asus/Pictures/Saved Pictures/dio-circle.png"
 								}
 							]
 						},
@@ -834,12 +857,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/v1/transactions",
+							"raw": "{{url}}/transactions",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"v1",
 								"transactions"
 							]
 						}
@@ -863,7 +885,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"campaign_id\": 1,\r\n    \"amount\": 5000000\r\n}",
+							"raw": "{\r\n    \"campaign_id\": 1,\r\n    \"amount\": 100000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
