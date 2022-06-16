@@ -32,6 +32,7 @@ Deployed on Heroku: [Go Crowdfunding](https://go-crowdfunding.herokuapp.com/)
 - [Bootadmin Template (Archived)](https://web.archive.org/web/20201129084141/https://github.com/kjdion84/bootadmin)
 - [Bootadmin Docs (Archived)](https://web.archive.org/web/20210301183117/https://bootadmin.net/demo/docs)
 - [accounting - money and currency formatting for golang](https://github.com/leekchan/accounting)
+- [Gin - Sessions](https://github.com/gin-contrib/sessions)
 
 ## Requirements
 
@@ -134,6 +135,12 @@ go get github.com/gin-contrib/multitemplate
 
 ```go
 go get github.com/leekchan/accounting
+```
+
+- [Gin - Sessions](https://github.com/gin-contrib/sessions)
+
+```go
+go get github.com/gin-contrib/sessions
 ```
 
 ## ngrok Commands
