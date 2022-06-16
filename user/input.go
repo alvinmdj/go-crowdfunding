@@ -9,9 +9,10 @@ type RegisterUserInput struct {
 }
 
 // LoginUserInput is the input required for logging in a user
+// this struct is used for both json (API call) and form data (CMS)
 type LoginInput struct {
-	Email    string `json:"email" binding:"required,email"`
-	Password string `json:"password" binding:"required"`
+	Email    string `json:"email" form:"email" binding:"required,email"`
+	Password string `json:"password" form:"password" binding:"required"`
 }
 
 // CheckEmailInput is the input required for checking if an email is available

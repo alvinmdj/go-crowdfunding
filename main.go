@@ -67,6 +67,7 @@ func main() {
 	userWebHandler := webHandler.NewUserHandler(userService)
 	campaignWebHandler := webHandler.NewCampaignHandler(campaignService, userService)
 	transactionWebHandler := webHandler.NewTransactionHandler(transactionService)
+	sessionWebHandler := webHandler.NewSessionHandler(userService)
 
 	// setup router
 	router := gin.Default()
@@ -117,6 +118,11 @@ func main() {
 
 	// transaction web routes
 	router.GET("/transactions", authAdminMiddleware(), transactionWebHandler.Index)
+
+	// session web routes
+	router.GET("/", sessionWebHandler.Create)
+	router.POST("/session", sessionWebHandler.Store)
+	router.GET("/logout", sessionWebHandler.Destroy)
 
 	// setup api routes
 	api := router.Group("/api/v1")
