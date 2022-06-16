@@ -203,7 +203,7 @@ func authMiddleware(authService auth.Service, userService user.Service) gin.Hand
 }
 
 // authAdminMiddleware is a middleware function that checks if the user is authenticated.
-// store admin user id to session
+// if admin is logged in, user id is stored in session.
 func authAdminMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
