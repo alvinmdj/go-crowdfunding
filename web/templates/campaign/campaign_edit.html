@@ -15,31 +15,31 @@
     <form action="/campaigns/update/{{ .ID }}" method="POST">
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" name="name" placeholder="Enter name" class="form-control" value="{{ .Name }}">
+        <input type="text" name="name" placeholder="Enter name" class="form-control" value="{{ .Name }}" required>
       </div>
 
       <div class="form-group">
         <label for="short_description">Short Description</label>
         <input type="text" name="short_description" placeholder="Enter short description" class="form-control"
-          value="{{ .ShortDescription }}">
+          value="{{ .ShortDescription }}" required>
       </div>
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea name="description" cols="30" rows="10" placeholder="Enter description"
-          class="form-control">{{ .Description }}</textarea>
+        <textarea name="description" cols="30" rows="10" placeholder="Enter description" class="form-control"
+          required>{{ .Description }}</textarea>
       </div>
 
       <div class="form-group">
         <label for="goal_amount">Goal Amount</label>
         <input type="number" name="goal_amount" placeholder="Enter goal amount" class="form-control"
-          value="{{ .GoalAmount }}">
+          value="{{ .GoalAmount }}" required>
       </div>
 
       <div class="form-group">
         <label for="perks">Perks</label>
         <input type="text" name="perks" placeholder="Enter perks (comma separated)" class="form-control"
-          value="{{ .Perks }}">
+          value="{{ .Perks }}" required>
       </div>
 
       <div>
