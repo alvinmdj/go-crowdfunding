@@ -252,3 +252,25 @@ func (h *campaignHandler) Update(c *gin.Context) {
 
 	c.Redirect(http.StatusFound, "/campaigns")
 }
+
+// Handler to show campaign details
+func (h *campaignHandler) Show(c *gin.Context) {
+	// get campaign id from uri
+	idFromParam := c.Param("id")
+
+	// convert id to int
+	id, err := strconv.Atoi(idFromParam)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	// get campaign by id
+	existingCampaign, err := h.campaignService.GetCampaignByID(campaign.GetCampaignDetailsInput{ID: id})
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	c.HTML(http.StatusOK, "campaign_show.html", existingCampaign)
+}
